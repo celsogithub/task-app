@@ -1,14 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <span>{{ title }} app is running!</span>
-  <app-componente1></app-componente1>
-  <app-componente2></app-componente2>
-</body>
-</html>
+<header>
+  <app-header></app-header>
+</header>
+
+<main>
+  <router-outlet></router-outlet>
+  <div class="container" [style.backgroundColor]="'white'">
+    <h3 class="grey-text text-darken-1">{{aboutDeveloper}}</h3>
+    <h3 class="grey-text text-darken-1">{{aboutDiscipline}}</h3>
+  </div>
+</main>
+
+<app-footer></app-footer>
