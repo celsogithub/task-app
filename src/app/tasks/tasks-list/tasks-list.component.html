@@ -1,0 +1,11 @@
+<div class="row">
+  <div class="col s12 m6 offset-m3">
+    <table>
+      <tbody>
+        <tr *ngFor="let task of this.tasks" (click)="onClickItem(task)">
+          <td><app-task-list-item [task]="task" (itemDeleteEvent)="deleteTask($event)"></app-task-list-item></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
