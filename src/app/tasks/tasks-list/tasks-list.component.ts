@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Task } from 'src/app/models/task';
-import { WebStorageUtil } from 'src/app/util/web-storage-util';
+import { TaskStorageService } from 'src/app/util/task-storage-service';
 
 @Component({
   selector: 'app-tasks-list',
@@ -12,10 +12,10 @@ import { WebStorageUtil } from 'src/app/util/web-storage-util';
 export class TasksListComponent implements OnInit {
   tasks!: Task[];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private taskService: TaskStorageService) { }
 
   ngOnInit(): void {
-    this.tasks = WebStorageUtil.get() as Task[];
+    this.tasks = this.taskService.getTasks();
   }
 
   onClickItem(task: Task) {
@@ -25,5 +25,6 @@ export class TasksListComponent implements OnInit {
   deleteTask(task: Task) {
     let index = this.tasks.findIndex(t => t.id == task.id);
     this.tasks.splice(index, 1);
+    this.taskService.delete(task.id);
   }
 }

@@ -1,6 +1,8 @@
-import { Component, EventEmitter, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 import { Task } from 'src/app/models/task';
+import { TaskStorageService } from 'src/app/util/task-storage-service';
 
 @Component({
   selector: 'app-add-task',
@@ -8,15 +10,30 @@ import { Task } from 'src/app/models/task';
   styleUrls: ['./add-task.component.css']
 })
 export class AddTaskComponent implements OnInit {
-  @Output() addTaskEvent = new EventEmitter<Task>();
+  @ViewChild('form') form!: NgForm;
 
-  constructor() { }
+  task = new Task('', '');
+
+  isSubmitted!: boolean;
+  isShowMessage: boolean = false;
+  isSuccess!: boolean;
+  message!: string;
+
+  constructor(private taskService: TaskStorageService) { }
 
   ngOnInit(): void {
   }
 
   onSubmit() {
-    let task = new Task('titulo', 'descrição');
-    this.addTaskEvent.emit(task);
+    this.isSubmitted = true;
+
+    this.taskService.save(this.task);
+
+    this.isShowMessage = true;
+    this.isSuccess = true;
+    this.message = 'Cadastro realizado com sucesso!';
+
+    this.form.reset();
+    this.task = new Task('', '');
   }
 }

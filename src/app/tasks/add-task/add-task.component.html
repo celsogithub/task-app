@@ -1,14 +1,40 @@
 <div class="container contact">
   <p></p>
-  <form class="col s12" (submit)="onSubmit()">
+  <div class="col s12">
+    <div
+      id="msg-login"
+      class="card-panel white-text"
+      [class.red]="!this.isSuccess"
+      [class.blue]="this.isSuccess"
+      *ngIf="this.isShowMessage"
+    >
+      {{ this.message }}
+    </div>
+  </div>
+  <form class="col s12" #form="ngForm" (submit)="onSubmit()">
     <div class="row">
       <div class="input-field col s12">
         <input
           id="input-title"
           name="input-title"
           type="text"
+          class="validate"
+          [(ngModel)]="this.task.title"
+          pattern="^[a-z]+([\.-]?[a-z]+)*"
+          #title="ngModel"
+          required
+          minlength="7"
         />
-        <label for="input-title" class="active">Título</label>
+        <label for="input-title" class="active">Título *</label>
+        <div class="red-text" [hidden]="title.valid || title.untouched">
+          Por favor, informe o título da task.
+        </div>
+        <div class="red-text" *ngIf="title.errors?.['required'] && title.touched">
+          Por favor, o título da task é obrigatório.
+        </div>
+        <div class="red-text" *ngIf="title.errors?.['minlength']">
+          Por favor, o título da task é deve ter 7 caracteres no mínimo.
+        </div>
       </div>
     </div>
     <div class="row">
@@ -17,11 +43,13 @@
           id="input-description"
           name="input-description"
           type="text"
+          [(ngModel)]="this.task.description"
+          #description="ngModel"
         />
         <label for="input-description" class="active">Descrição</label>
       </div>
     </div>
-    <button class="btn waves-effect waves-light deep-purple darken-4" type="submit">
+    <button class="btn waves-effect waves-light deep-purple darken-4" type="submit" [disabled]="!form.valid">
       Cadastrar
     </button>
   </form>

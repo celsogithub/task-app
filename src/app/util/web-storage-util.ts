@@ -1,6 +1,7 @@
 const TASK_KEY = 'key';
 
 export class WebStorageUtil {
+  task!: Task[];
 
   static get(): any {
     return JSON.parse(localStorage.getItem(TASK_KEY)!);
