@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { AppComponent } from 'src/app/app.component';
@@ -19,6 +20,7 @@ import { AboutModule } from 'src/app/about/about.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     ErrorsModule,
     TasksModule,
     AboutModule,

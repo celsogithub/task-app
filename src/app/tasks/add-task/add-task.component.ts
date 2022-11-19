@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { Task } from 'src/app/models/task';
-import { TaskStorageService } from 'src/app/util/task-storage-service';
+import { TaskService } from 'src/app/services/task.service';
 
 @Component({
   selector: 'app-add-task',
@@ -19,7 +19,7 @@ export class AddTaskComponent implements OnInit {
   isSuccess!: boolean;
   message!: string;
 
-  constructor(private taskService: TaskStorageService) { }
+  constructor(private taskService: TaskService) { }
 
   ngOnInit(): void {
   }
