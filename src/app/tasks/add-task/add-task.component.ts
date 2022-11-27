@@ -12,7 +12,7 @@ import { TaskService } from 'src/app/services/task.service';
 export class AddTaskComponent implements OnInit {
   @ViewChild('form') form!: NgForm;
 
-  task = new Task('', '');
+  task = new Task('', '', new Date());
 
   isSubmitted!: boolean;
   isShowMessage: boolean = false;
@@ -27,13 +27,13 @@ export class AddTaskComponent implements OnInit {
   onSubmit() {
     this.isSubmitted = true;
 
-    this.taskService.save(this.task);
+    this.taskService.save(this.task).subscribe();
 
     this.isShowMessage = true;
     this.isSuccess = true;
     this.message = 'Cadastro realizado com sucesso!';
 
     this.form.reset();
-    this.task = new Task('', '');
+    this.task = new Task('', '', new Date());
   }
 }

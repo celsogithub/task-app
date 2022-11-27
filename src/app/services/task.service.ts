@@ -1,5 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { catchError, Observable, OperatorFunction, throwError } from 'rxjs';
 
 import { Task } from 'src/app/models/task';
 
@@ -15,21 +16,41 @@ export class TaskService {
 
   constructor(private httpClient: HttpClient) { }
 
-  save(task: Task): Promise<Task> {
+  save(task: Task): Observable<Task> {
     return this.httpClient
       .post(this.URL, JSON.stringify(task), this.httpOptions)
-      .toPromise() as Promise<Task>;
+      .pipe(
+        catchError(this.handleError) as OperatorFunction<Object, Task>
+      );
   }
 
-  getTasks(): Promise<Task[]> {
+  getTasks(): Observable<Task[]> {
     return this.httpClient
       .get<Task[]>(this.URL, this.httpOptions)
-      .toPromise() as Promise<Task[]>;
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
-  delete(taskId: number): Promise<Task> {
+  delete(taskId: number): Observable<Task> {
     return this.httpClient
       .delete<Task>( `${this.URL}/${taskId}`, this.httpOptions)
-      .toPromise() as Promise<Task>;
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    if (error.status === 0) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error('An error occurred:', error.error);
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong.
+      console.error(
+        `Backend returned code ${error.status}, body was: `, error.error);
+    }
+    // Return an observable with a user-facing error message.
+    return throwError(() => new Error('Something bad happened; please try again later.'));
   }
 }

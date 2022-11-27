@@ -17,16 +17,13 @@ export class TasksListComponent implements OnInit {
   ngOnInit(): void {
     this.taskService
       .getTasks()
-      .then((tasks: Task[]) => {
+      .subscribe((tasks: Task[]) => {
         this.tasks = tasks;
         tasks.forEach(t => {
           console.log(t.id);
           console.log(t.title);
           console.log(t.description);
         });
-      })
-      .catch((e) => {
-        console.log('erro ao consultar a lista de tasks: ' + e);
       });
   }
 
@@ -37,6 +34,6 @@ export class TasksListComponent implements OnInit {
   deleteTask(task: Task) {
     let index = this.tasks.findIndex(t => t.id == task.id);
     this.tasks.splice(index, 1);
-    this.taskService.delete(task.id);
+    this.taskService.delete(task.id).subscribe();
   }
 }

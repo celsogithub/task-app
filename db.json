@@ -3,12 +3,14 @@
     {
       "id": 1,
       "title": "lista de compras",
-      "description": "Produtos do mercado"
+      "description": "Produtos do mercado",
+      "creationDate": "2022-11-27T18:56:32.168Z"
     },
     {
       "id": 2,
       "title": "prova de inglês",
-      "description": "Estudar verbo to be"
+      "description": "Estudar verbo to be",
+      "creationDate": "2022-11-27T18:57:32.168Z"
     }
   ]
 }
