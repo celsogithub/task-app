@@ -4,7 +4,7 @@ Este projeto tem como objetivo implementar progressivamente uma aplicação Web 
 
 # Endereço de Deploy - GitHub Pages
 
-A definir.
+https://celsogithub.github.io/task-app/
 
 # Protótipo
 
