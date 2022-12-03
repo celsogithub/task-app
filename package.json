@@ -4,7 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --base-href=/task-app/",
+    "ghpages": "angular-cli-ghpages --dir=dist/task-app --repo=https://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@github.com/celsogithub/task-app.git --name=\"Celso Fujii\" email=celsokf@gmail.com",
+    "deploy": "npm run build & npm run ghpages",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "json:server": "json-server --watch db.json",
@@ -20,6 +22,7 @@
     "@angular/platform-browser": "^14.2.0",
     "@angular/platform-browser-dynamic": "^14.2.0",
     "@angular/router": "^14.2.0",
+    "angular-cli-ghpages": "^1.0.5",
     "json-server": "^0.17.1",
     "material-icons": "^1.12.0",
     "materialize-css": "^1.0.0",
